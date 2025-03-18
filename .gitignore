@@ -1,0 +1,4 @@
+/bin/
+/config.sealed.bin
+.DS_Store
+*.swp
