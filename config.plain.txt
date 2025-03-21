@@ -1,0 +1,4 @@
+service.name=greeter
+service.greeting=Hello from inside the confidential workload
+db.password=hunter2-demo-secret
+feature.flags=attested-key-release,sealed-config

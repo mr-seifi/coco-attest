@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-10-23T08:16:24Z",
+  "runs": 300,
+  "results": [
+    {
+      "label": "plain_startup",
+      "unit": "ms",
+      "n": 300,
+      "mean": 0.00004,
+      "p50": 0,
+      "p90": 0,
+      "p99": 0.001,
+      "min": 0,
+      "max": 0.008
+    },
+    {
+      "label": "attested_startup",
+      "unit": "ms",
+      "n": 300,
+      "mean": 110.90035333333336,
+      "p50": 94.856,
+      "p90": 186.076,
+      "p99": 317.995,
+      "min": 25.179,
+      "max": 750.048
+    }
+  ],
+  "notes": "Measures the attestation-protocol overhead at startup on the software backend. TEE memory-encryption CPU/RAM overhead requires real SEV-SNP/TDX hardware and is not captured here."
+}
