@@ -1,0 +1,11 @@
+FROM golang:1.22 AS build
+WORKDIR /src
+COPY go.mod ./
+COPY . .
+RUN CGO_ENABLED=0 go build -o /out/kbs ./cmd/kbs
+
+FROM gcr.io/distroless/static-debian12
+COPY --from=build /out/kbs /kbs
+EXPOSE 8080
+ENV KBS_ADDR=:8080
+ENTRYPOINT ["/kbs"]

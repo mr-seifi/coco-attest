@@ -1,0 +1,16 @@
+FROM golang:1.22 AS build
+WORKDIR /src
+COPY go.mod ./
+COPY . .
+RUN CGO_ENABLED=0 go build -o /out/workload ./cmd/workload \
+ && CGO_ENABLED=0 go build -o /out/seal ./cmd/seal \
+ && /out/seal -in config.plain.txt -out /out/config.sealed.bin
+
+FROM gcr.io/distroless/static-debian12
+COPY --from=build /out/workload /workload
+COPY --from=build /out/config.sealed.bin /config.sealed.bin
+EXPOSE 9090
+ENV WORKLOAD_ADDR=:9090 \
+    KBS_URL=http://kbs:8080 \
+    SEALED_CONFIG=/config.sealed.bin
+ENTRYPOINT ["/workload"]
